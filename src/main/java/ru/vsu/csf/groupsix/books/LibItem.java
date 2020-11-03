@@ -1,8 +1,9 @@
 package ru.vsu.csf.groupsix.books;
 
+import ru.vsu.csf.groupsix.common.Drawable;
 import ru.vsu.csf.groupsix.common.Storeable;
 
-public class LibItem implements Storeable {
+public class LibItem implements Storeable, Drawable {
 
     private Long id;
 
@@ -34,5 +35,10 @@ public class LibItem implements Storeable {
 
     public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
+    }
+
+    @Override
+    public void Draw() {
+
     }
 }

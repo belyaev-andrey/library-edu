@@ -2,6 +2,8 @@ package ru.vsu.csf.groupsix.library.storage;
 
 import ru.vsu.csf.groupsix.books.Book;
 import ru.vsu.csf.groupsix.books.LibItem;
+import ru.vsu.csf.groupsix.common.exception.BookStorageException;
+import ru.vsu.csf.groupsix.common.exception.BookStorageSearchException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 public class DbBookStorage implements BookStorage {
 
     @Override
-    public List<LibItem> findItem(LibItem request) {
+    public List<LibItem> findItem(LibItem request) throws BookStorageSearchException {
         List<LibItem> result = new ArrayList<>();
         try (Connection c = getConnection()) {
             //select id, name, pages, author from books where name like request.getName()+"%"
@@ -26,7 +28,7 @@ public class DbBookStorage implements BookStorage {
                 result.add(b);
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            throw new BookStorageSearchException("Cannot find library item", exception);
         }
         return result;
     }
@@ -42,7 +44,7 @@ public class DbBookStorage implements BookStorage {
     }
 
     @Override
-    public LibItem storeItem(LibItem item) {
+    public LibItem storeItem(LibItem item) throws BookStorageException {
         try (Connection c = getConnection()) {
             //insert into books (id, name, pages, author) values (item.getId(), itm.getName(),....)
             //Statement statement = c.createStatement();
@@ -57,7 +59,7 @@ public class DbBookStorage implements BookStorage {
             stmt.executeUpdate();
             return item;
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            throw new BookStorageException(exception);
         }
     }
 

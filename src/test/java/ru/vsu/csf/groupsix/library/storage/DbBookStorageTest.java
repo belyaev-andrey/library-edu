@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.vsu.csf.groupsix.books.Book;
 import ru.vsu.csf.groupsix.books.LibItem;
+import ru.vsu.csf.groupsix.common.exception.BookStorageException;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DbBookStorageTest {
 
     @Test
-    public void testAddBook() {
+    public void testAddBook() throws BookStorageException {
 
         Book b = new Book();
         final long id = new Date().getTime();
@@ -28,7 +29,7 @@ public class DbBookStorageTest {
     }
 
     @Test
-    public void testSearchBook() {
+    public void testSearchBook() throws BookStorageException {
 
         Book b = new Book();
         final long id = new Date().getTime();

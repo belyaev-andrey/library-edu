@@ -1,6 +1,8 @@
 package ru.vsu.csf.groupsix.library;
 
 import ru.vsu.csf.groupsix.books.LibItem;
+import ru.vsu.csf.groupsix.common.exception.BookStorageException;
+import ru.vsu.csf.groupsix.common.exception.BookStorageSearchException;
 import ru.vsu.csf.groupsix.library.storage.BookStorage;
 import ru.vsu.csf.groupsix.library.storage.FileBookStorage;
 import ru.vsu.csf.groupsix.library.storage.DbBookStorage;
@@ -21,10 +23,14 @@ public class Library {
     }
 
     public LibraryCard giveBook(User user, LibItem request) {
-        bookStorage.findItem(request).forEach(item -> {
-            bookStorage.giveItem(item);
-            user.getCard().giveBook(item);
-        });
+        try {
+            bookStorage.findItem(request).forEach(item -> {
+                bookStorage.giveItem(item);
+                user.getCard().giveBook(item);
+            });
+        } catch (BookStorageSearchException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

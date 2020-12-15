@@ -1,11 +1,12 @@
 package ru.vsu.csf.groupsix.library;
 
-import ru.vsu.csf.groupsix.library.storage.BookStorage;
+import ru.vsu.csf.groupsix.library.storage.book.BookStorage;
+import ru.vsu.csf.groupsix.library.storage.user.UserStorage;
 
 public class ElectronicLibrary extends Library {
 
-    public ElectronicLibrary(BookStorage bookStorage) {
-        super(bookStorage);
+    public ElectronicLibrary(BookStorage bookStorage, UserStorage userStorage) {
+        super(bookStorage, userStorage);
     }
 
     @Override

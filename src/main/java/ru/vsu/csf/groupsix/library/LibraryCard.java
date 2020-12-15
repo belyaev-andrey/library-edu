@@ -27,6 +27,7 @@ public class LibraryCard implements Storeable {
 
     public LibraryCard(User user) {
         this.user = user;
+        user.setCard(this);
     }
 
     public LocalDateTime giveBook(LibItem libItem) {

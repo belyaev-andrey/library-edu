@@ -1,10 +1,12 @@
 package ru.vsu.csf.groupsix.library.storage;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.vsu.csf.groupsix.books.Book;
 import ru.vsu.csf.groupsix.books.LibItem;
 import ru.vsu.csf.groupsix.common.exception.BookStorageException;
+import ru.vsu.csf.groupsix.library.storage.book.BookStorage;
+import ru.vsu.csf.groupsix.library.storage.factory.ConnectionProxy;
+import ru.vsu.csf.groupsix.library.storage.book.DbBookStorage;
 
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,7 @@ public class DbBookStorageTest {
         b.setPageNum(1000);
         b.setAuthor("Tolstoy");
 
-        BookStorage dbBookStorage = new DbBookStorage();
+        BookStorage dbBookStorage = new DbBookStorage(new ConnectionProxy());
         LibItem itm = dbBookStorage.storeItem(b);
         assertEquals(id, itm.getId().longValue());
     }
@@ -38,7 +40,7 @@ public class DbBookStorageTest {
         b.setPageNum(1);
         b.setAuthor("");
 
-        BookStorage dbBookStorage = new DbBookStorage();
+        BookStorage dbBookStorage = new DbBookStorage(new ConnectionProxy());
         dbBookStorage.storeItem(b);
 
         LibItem itm = new LibItem();

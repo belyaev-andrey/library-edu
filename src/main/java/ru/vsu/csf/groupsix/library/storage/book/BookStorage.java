@@ -1,4 +1,4 @@
-package ru.vsu.csf.groupsix.library.storage;
+package ru.vsu.csf.groupsix.library.storage.book;
 
 import ru.vsu.csf.groupsix.books.LibItem;
 import ru.vsu.csf.groupsix.common.exception.BookStorageException;
